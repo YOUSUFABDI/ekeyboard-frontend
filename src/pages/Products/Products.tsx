@@ -8,7 +8,9 @@ import IconEdit from '../../components/Icon/IconEdit'
 import IconEye from '../../components/Icon/IconEye'
 import IconPlus from '../../components/Icon/IconPlus'
 import IconTrashLines from '../../components/Icon/IconTrashLines'
+import { useGetAllProductsQuery } from '../../store/product/productApi'
 import { setPageTitle } from '../../store/themeConfigSlice'
+import { ApiErrorResponseDT, ApiSuccessResponseDT, ProductDT } from '../../lib/types'
 
 const toast = Swal.mixin({
     toast: true,
@@ -20,174 +22,54 @@ const toast = Swal.mixin({
 
 const Products = () => {
     const dispatch = useDispatch()
+    const [products, setProducts] = useState<ProductDT[]>([])
+
+    const { data, error, isLoading, isError } = useGetAllProductsQuery()
 
     useEffect(() => {
-        dispatch(setPageTitle('Profile'))
-    })
+        dispatch(setPageTitle('Products'))
 
-    const [items, setItems] = useState([
-        {
-            id: 1,
-            invoice: '081451',
-            name: 'Laurie Fox',
-            email: 'lauriefox@company.com',
-            date: '15 Dec 2020',
-            amount: '2275.45',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 2,
-            invoice: '081452',
-            name: 'Alexander Gray',
-            email: 'alexGray3188@gmail.com',
-            date: '20 Dec 2020',
-            amount: '1044.00',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 3,
-            invoice: '081681',
-            name: 'James Taylor',
-            email: 'jamestaylor468@gmail.com',
-            date: '27 Dec 2020',
-            amount: '20.00',
-            status: { tooltip: 'Pending', color: 'danger' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 4,
-            invoice: '082693',
-            name: 'Grace Roberts',
-            email: 'graceRoberts@company.com',
-            date: '31 Dec 2020',
-            amount: '344.00',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 5,
-            invoice: '084743',
-            name: 'Donna Rogers',
-            email: 'donnaRogers@hotmail.com',
-            date: '03 Jan 2021',
-            amount: '405.15',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 6,
-            invoice: '086643',
-            name: 'Amy Diaz',
-            email: 'amy968@gmail.com',
-            date: '14 Jan 2020',
-            amount: '100.00',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 7,
-            invoice: '086773',
-            name: 'Nia Hillyer',
-            email: 'niahillyer666@comapny.com',
-            date: '20 Jan 2021',
-            amount: '59.21',
-            status: { tooltip: 'Pending', color: 'danger' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 8,
-            invoice: '087916',
-            name: 'Mary McDonald',
-            email: 'maryDonald007@gamil.com',
-            date: '25 Jan 2021',
-            amount: '79.00',
-            status: { tooltip: 'Pending', color: 'danger' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 9,
-            invoice: '089472',
-            name: 'Andy King',
-            email: 'kingandy07@company.com',
-            date: '28 Jan 2021',
-            amount: '149.00',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 10,
-            invoice: '091768',
-            name: 'Vincent Carpenter',
-            email: 'vincentcarpenter@gmail.com',
-            date: '30 Jan 2021',
-            amount: '400',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 11,
-            invoice: '095841',
-            name: 'Kelly Young',
-            email: 'youngkelly@hotmail.com',
-            date: '06 Feb 2021',
-            amount: '49.00',
-            status: { tooltip: 'Pending', color: 'danger' },
-            profile: 'profile-1.jpeg',
-        },
-        {
-            id: 12,
-            invoice: '098424',
-            name: 'Alma Clarke',
-            email: 'alma.clarke@gmail.com',
-            date: '10 Feb 2021',
-            amount: '234.40',
-            status: { tooltip: 'Paid', color: 'success' },
-            profile: 'profile-1.jpeg',
-        },
-    ])
+        if (isError) {
+            let errorMessage = 'An error occurred'
+            if (error && 'data' in error) {
+                const errorData = error.data as ApiErrorResponseDT
+                errorMessage = errorData.error?.message || errorMessage
+            }
+            toast.fire({
+                icon: 'error',
+                title: errorMessage,
+                padding: '2em',
+            })
+        }
+
+        if (data && data.payload && !data.error) {
+            const response = data as ApiSuccessResponseDT<ProductDT[]>
+            setProducts(response.payload.data) // Set products state with API data
+        }
+    }, [data, isError, error, dispatch])
 
     const deleteRow = (id: any = null) => {
         if (window.confirm('Are you sure want to delete selected row ?')) {
-            if (id) {
-                setRecords(items.filter((user) => user.id !== id))
-                setInitialRecords(items.filter((user) => user.id !== id))
-                setItems(items.filter((user) => user.id !== id))
-                setSearch('')
-                setSelectedRecords([])
-            } else {
-                let selectedRows = selectedRecords || []
-                const ids = selectedRows.map((d: any) => {
-                    return d.id
-                })
-                const result = items.filter((d) => !ids.includes(d.id as never))
-                setRecords(result)
-                setInitialRecords(result)
-                setItems(result)
-                setSearch('')
-                setSelectedRecords([])
-                setPage(1)
-            }
+            const updatedProducts = id ? products.filter((product) => product.id !== id) : products.filter((product) => !selectedRecords.includes(product.id))
+            setProducts(updatedProducts)
         }
     }
 
     const [page, setPage] = useState(1)
     const PAGE_SIZES = [10, 20, 30, 50, 100]
     const [pageSize, setPageSize] = useState(PAGE_SIZES[0])
-    const [initialRecords, setInitialRecords] = useState(sortBy(items, 'invoice'))
+    const [initialRecords, setInitialRecords] = useState(sortBy(products, 'name')) // Assuming 'name' exists in your product data
     const [records, setRecords] = useState(initialRecords)
     const [selectedRecords, setSelectedRecords] = useState<any>([])
 
     const [search, setSearch] = useState('')
     const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
-        columnAccessor: 'firstName',
+        columnAccessor: 'name', // Assuming sorting by 'name'
         direction: 'asc',
     })
 
     useEffect(() => {
         setPage(1)
-        /* eslint-disable react-hooks/exhaustive-deps */
     }, [pageSize])
 
     useEffect(() => {
@@ -198,24 +80,19 @@ const Products = () => {
 
     useEffect(() => {
         setInitialRecords(() => {
-            return items.filter((item) => {
+            return products.filter((product) => {
                 return (
-                    item.invoice.toLowerCase().includes(search.toLowerCase()) ||
-                    item.name.toLowerCase().includes(search.toLowerCase()) ||
-                    item.email.toLowerCase().includes(search.toLowerCase()) ||
-                    item.date.toLowerCase().includes(search.toLowerCase()) ||
-                    item.amount.toLowerCase().includes(search.toLowerCase()) ||
-                    item.status.tooltip.toLowerCase().includes(search.toLowerCase())
+                    product.name.toLowerCase().includes(search.toLowerCase()) || product.description.toLowerCase().includes(search.toLowerCase()) // Adjust based on your product fields
                 )
             })
         })
-    }, [search])
+    }, [search, products])
 
     useEffect(() => {
-        const data2 = sortBy(initialRecords, sortStatus.columnAccessor)
-        setRecords(sortStatus.direction === 'desc' ? data2.reverse() : data2)
+        const sortedData = sortBy(initialRecords, sortStatus.columnAccessor)
+        setRecords(sortStatus.direction === 'desc' ? sortedData.reverse() : sortedData)
         setPage(1)
-    }, [sortStatus])
+    }, [sortStatus, initialRecords])
 
     return (
         <div>
@@ -239,7 +116,7 @@ const Products = () => {
                                     <IconTrashLines />
                                     Delete
                                 </button>
-                                <Link to="/apps/invoice/add" className="btn btn-primary gap-2">
+                                <Link to="/products/create" className="btn btn-primary gap-2">
                                     <IconPlus />
                                     Add New
                                 </Link>
@@ -255,44 +132,50 @@ const Products = () => {
                                 records={records}
                                 columns={[
                                     {
-                                        accessor: 'invoice',
+                                        accessor: 'id',
                                         sortable: true,
-                                        render: ({ invoice }) => (
-                                            <NavLink to="/apps/invoice/preview">
-                                                <div className="text-primary underline hover:no-underline font-semibold">{`#${invoice}`}</div>
+                                        render: ({ id }) => (
+                                            <NavLink to={`/products/${id}`}>
+                                                <div className="text-primary underline hover:no-underline font-semibold">{`#${id}`}</div>
                                             </NavLink>
                                         ),
                                     },
                                     {
                                         accessor: 'name',
                                         sortable: true,
-                                        render: ({ name, id }) => (
+                                        render: ({ name }) => (
                                             <div className="flex items-center font-semibold">
-                                                <div className="p-0.5 bg-white-dark/30 rounded-full w-max ltr:mr-2 rtl:ml-2">
-                                                    <img className="h-8 w-8 rounded-full object-cover" src={`/assets/images/profile-${id}.jpeg`} alt="" />
-                                                </div>
                                                 <div>{name}</div>
                                             </div>
                                         ),
                                     },
                                     {
-                                        accessor: 'email',
+                                        accessor: 'image',
+                                        sortable: true,
+                                        render: ({ images }) => (
+                                            <div className="flex items-center font-semibold">
+                                                <div className="flex">
+                                                    {images.map((image) => (
+                                                        <img key={image.id} className="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src={image.imageUrl} alt="product-img" />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ),
+                                    },
+                                    {
+                                        accessor: 'description',
                                         sortable: true,
                                     },
                                     {
-                                        accessor: 'date',
-                                        sortable: true,
-                                    },
-                                    {
-                                        accessor: 'amount',
+                                        accessor: 'price',
                                         sortable: true,
                                         titleClassName: 'text-right',
-                                        render: ({ amount, id }) => <div className="text-right font-semibold">{`$${amount}`}</div>,
+                                        render: ({ price }) => <div className="text-left font-semibold">{`$${price.toFixed(2)}`}</div>,
                                     },
                                     {
-                                        accessor: 'status',
+                                        accessor: 'stock',
                                         sortable: true,
-                                        render: ({ status }) => <span className={`badge badge-outline-${status.color} `}>{status.tooltip}</span>,
+                                        render: ({ stock }) => <span className={`badge badge-outline-${stock > 0 ? 'success' : 'danger'}`}>{stock > 0 ? 'In Stock' : 'Out of Stock'}</span>,
                                     },
                                     {
                                         accessor: 'action',
@@ -301,17 +184,15 @@ const Products = () => {
                                         textAlignment: 'center',
                                         render: ({ id }) => (
                                             <div className="flex gap-4 items-center w-max mx-auto">
-                                                <NavLink to="/apps/invoice/edit" className="flex hover:text-info">
+                                                <NavLink to={`/products/edit/${id}`} className="flex hover:text-info">
                                                     <IconEdit className="w-4.5 h-4.5" />
                                                 </NavLink>
-                                                <NavLink to="/apps/invoice/preview" className="flex hover:text-primary">
+                                                <NavLink to={`/products/view/${id}`} className="flex hover:text-primary">
                                                     <IconEye />
                                                 </NavLink>
-                                                {/* <NavLink to="" className="flex"> */}
-                                                <button type="button" className="flex hover:text-danger" onClick={(e) => deleteRow(id)}>
+                                                <button type="button" className="flex hover:text-danger" onClick={() => deleteRow(id)}>
                                                     <IconTrashLines />
                                                 </button>
-                                                {/* </NavLink> */}
                                             </div>
                                         ),
                                     },

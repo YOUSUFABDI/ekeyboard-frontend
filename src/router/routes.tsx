@@ -7,6 +7,7 @@ const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
 const Index = lazy(() => import('../pages/Index'))
 const Profile = lazy(() => import('../pages/Users/Profile'))
 const Error = lazy(() => import('../components/Error'))
+const CreateProduct = lazy(() => import('../pages/Products/CreateProduct'))
 const ProtectedPermistion = lazy(() => import('../components/ProtectPermistion'))
 
 const routes = [
@@ -29,6 +30,16 @@ const routes = [
             <ProtectedRoute>
                 <ProtectedPermistion>
                     <Products />
+                </ProtectedPermistion>
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: '/products/create',
+        element: (
+            <ProtectedRoute>
+                <ProtectedPermistion>
+                    <CreateProduct />
                 </ProtectedPermistion>
             </ProtectedRoute>
         ),

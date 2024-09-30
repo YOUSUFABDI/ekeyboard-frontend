@@ -47,3 +47,21 @@ export type UpdatePassDT = {
     newPassword: string
     confirmPassword: string
 }
+
+type ImageDT = {
+    id: string
+    productId: string
+    imageUrl: string
+}
+
+export type ProductDT = {
+    id: string
+    name: string
+    price: number
+    description: string
+    likes: number
+    stock: number
+    createdDT: string
+    categoryId: number
+    images: ImageDT[]
+}

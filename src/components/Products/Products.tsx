@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import IconEdit from '../../components/Icon/IconEdit'
-import IconEye from '../../components/Icon/IconEye'
-import IconPlus from '../../components/Icon/IconPlus'
-import IconTrashLines from '../../components/Icon/IconTrashLines'
-import { useGetAllProductsQuery } from '../../store/product/productApi'
+import IconEdit from '../Icon/IconEdit'
+import IconEye from '../Icon/IconEye'
+import IconPlus from '../Icon/IconPlus'
+import IconTrashLines from '../Icon/IconTrashLines'
+import { useDeleteProductMutation, useGetAllProductsQuery } from '../../store/product/productApi'
 import { setPageTitle } from '../../store/themeConfigSlice'
 import { ApiErrorResponseDT, ApiSuccessResponseDT, ProductDT } from '../../lib/types'
 
@@ -23,6 +23,7 @@ const toast = Swal.mixin({
 const Products = () => {
     const dispatch = useDispatch()
     const [products, setProducts] = useState<ProductDT[]>([])
+    const [deleteProduct] = useDeleteProductMutation()
 
     const { data, error, isLoading, isError } = useGetAllProductsQuery()
 
@@ -93,6 +94,26 @@ const Products = () => {
         setRecords(sortStatus.direction === 'desc' ? sortedData.reverse() : sortedData)
         setPage(1)
     }, [sortStatus, initialRecords])
+
+    const handleDelete = async (productId: string) => {
+        const confirmDelete = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action will permanently delete the product!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        })
+        if (confirmDelete.isConfirmed) {
+            try {
+                await deleteProduct(productId).unwrap()
+                Swal.fire('Deleted', 'The product has been deleted.', 'success')
+            } catch (error) {
+                Swal.fire('Error!', 'Failed to delete the product.', 'error')
+            }
+        }
+    }
 
     return (
         <div>
@@ -190,7 +211,7 @@ const Products = () => {
                                                 <NavLink to={`/products/view/${id}`} className="flex hover:text-primary">
                                                     <IconEye />
                                                 </NavLink>
-                                                <button type="button" className="flex hover:text-danger" onClick={() => deleteRow(id)}>
+                                                <button type="button" className="flex hover:text-danger" onClick={() => handleDelete(id)}>
                                                     <IconTrashLines />
                                                 </button>
                                             </div>

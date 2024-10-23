@@ -65,3 +65,26 @@ export type ProductDT = {
     categoryId: number
     images: ImageDT[]
 }
+
+export type CategoryDT = {
+    id: number
+    name: string
+}
+
+export type CategoryApiResponseDT = {
+    statusCode: number
+    payload: {
+        data: CategoryDT[]
+        message: string
+    }
+    error: null
+}
+
+export type CreateProductRequest = {
+    productName: string
+    productPrice: number
+    productDescription: string
+    productImage: string[]
+    productStock: number
+    categoryId: number
+}

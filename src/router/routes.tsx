@@ -1,13 +1,13 @@
 import { lazy } from 'react'
 import AccountSetting from '../pages/Users/AccountSetting'
 import NotAllowed from '../pages/NotAllowed'
-const Login = lazy(() => import('../components/Login'))
-const Products = lazy(() => import('../pages/Products/Products'))
+const Login = lazy(() => import('../components/Auth/Login'))
+const Products = lazy(() => import('../components/Products/Products'))
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
 const Index = lazy(() => import('../pages/Index'))
 const Profile = lazy(() => import('../pages/Users/Profile'))
 const Error = lazy(() => import('../components/Error'))
-const CreateProduct = lazy(() => import('../pages/Products/CreateProduct'))
+const CreateProductPage = lazy(() => import('../pages/ProductsPage/CreateProductPage'))
 const ProtectedPermistion = lazy(() => import('../components/ProtectPermistion'))
 
 const routes = [
@@ -39,7 +39,7 @@ const routes = [
         element: (
             <ProtectedRoute>
                 <ProtectedPermistion>
-                    <CreateProduct />
+                    <CreateProductPage />
                 </ProtectedPermistion>
             </ProtectedRoute>
         ),

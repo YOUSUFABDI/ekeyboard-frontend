@@ -1,7 +1,7 @@
 import CreateProduct from '../../components/Products/CreateProduct'
 
-const CreateProductPage = () => {
+const ProductPage = () => {
     return <CreateProduct />
 }
 
-export default CreateProductPage
+export default ProductPage

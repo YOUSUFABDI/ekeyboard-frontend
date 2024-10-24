@@ -204,7 +204,7 @@ const Products = () => {
                                         textAlignment: 'center',
                                         render: ({ id }) => (
                                             <div className="flex gap-4 items-center w-max mx-auto">
-                                                <NavLink to={`/products/edit/${id}`} className="flex hover:text-info">
+                                                <NavLink to={`/product/${id}`} className="flex hover:text-info">
                                                     <IconEdit className="w-4.5 h-4.5" />
                                                 </NavLink>
                                                 <button type="button" className="flex hover:text-danger" onClick={() => handleDelete(id)}>

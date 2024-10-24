@@ -80,7 +80,16 @@ export type CategoryApiResponseDT = {
     error: null
 }
 
-export type CreateProductRequest = {
+export type CreateProductRequestDT = {
+    productName: string
+    productPrice: number
+    productDescription: string
+    productImage: string[]
+    productStock: number
+    categoryId: number
+}
+
+export type UpdateProductRequestDT = {
     productName: string
     productPrice: number
     productDescription: string

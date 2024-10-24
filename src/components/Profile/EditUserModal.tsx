@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import IconX from '../../components/Icon/IconX'
+import IconX from '../Icon/IconX'
 
 interface EditUserModalDT {
     userModal: boolean

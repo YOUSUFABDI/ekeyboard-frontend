@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
-import { ApiSuccessResponseDT, CreateProductRequest, ProductDT } from '../../lib/types'
+import { ApiSuccessResponseDT, CreateProductRequestDT, ProductDT, UpdateProductRequestDT } from '../../lib/types'
 import { API } from '../api'
 
 const token = localStorage.getItem('token')
@@ -20,10 +20,23 @@ export const productApi = createApi({
             providesTags: ['products'],
         }),
 
-        createProduct: builder.mutation<ApiSuccessResponseDT<ProductDT>, CreateProductRequest>({
+        createProduct: builder.mutation<ApiSuccessResponseDT<ProductDT>, CreateProductRequestDT>({
             query: (requestBody) => ({
                 url: '/product/create',
                 method: 'POST',
+                body: requestBody,
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+            invalidatesTags: ['products'],
+        }),
+
+        updateProduct: builder.mutation<ApiSuccessResponseDT<ProductDT>, { requestBody: UpdateProductRequestDT; productId: string }>({
+            query: ({ requestBody, productId }) => ({
+                url: `/product/update/${productId}`,
+                method: 'PATCH',
                 body: requestBody,
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,4 +59,4 @@ export const productApi = createApi({
     }),
 })
 
-export const { useGetAllProductsQuery, useCreateProductMutation, useDeleteProductMutation } = productApi
+export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } = productApi

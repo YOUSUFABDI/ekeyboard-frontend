@@ -1,14 +1,15 @@
 import { lazy } from 'react'
-import AccountSetting from '../pages/Users/AccountSetting'
+import AccountSetting from '../components/Profile/AccountSetting'
 import NotAllowed from '../pages/NotAllowed'
 const Login = lazy(() => import('../components/Auth/Login'))
 const Products = lazy(() => import('../components/Products/Products'))
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
 const Index = lazy(() => import('../pages/Index'))
-const Profile = lazy(() => import('../pages/Users/Profile'))
+const Profile = lazy(() => import('../pages/ProfilePage/Profile'))
 const Error = lazy(() => import('../components/Error'))
-const CreateProductPage = lazy(() => import('../pages/ProductsPage/CreateProductPage'))
+const ProductPage = lazy(() => import('../pages/ProductsPage/ProductPage'))
 const ProtectedPermistion = lazy(() => import('../components/ProtectPermistion'))
+const EditProductPage = lazy(() => import('../pages/ProductsPage/EditProductPage'))
 
 const routes = [
     {
@@ -39,7 +40,17 @@ const routes = [
         element: (
             <ProtectedRoute>
                 <ProtectedPermistion>
-                    <CreateProductPage />
+                    <ProductPage />
+                </ProtectedPermistion>
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: 'product/:id',
+        element: (
+            <ProtectedRoute>
+                <ProtectedPermistion>
+                    <EditProductPage />
                 </ProtectedPermistion>
             </ProtectedRoute>
         ),

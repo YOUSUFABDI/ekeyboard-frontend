@@ -92,7 +92,7 @@ const CreateProduct = () => {
         <div>
             <ul className="flex space-x-2 rtl:space-x-reverse">
                 <li>
-                    <Link to="#" className="text-primary hover:underline">
+                    <Link to="/products" className="text-primary hover:underline">
                         Products
                     </Link>
                 </li>

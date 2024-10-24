@@ -4,13 +4,12 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import IconEdit from '../Icon/IconEdit'
-import IconEye from '../Icon/IconEye'
-import IconPlus from '../Icon/IconPlus'
-import IconTrashLines from '../Icon/IconTrashLines'
+import { ApiErrorResponseDT, ApiSuccessResponseDT, ProductDT } from '../../lib/types'
 import { useDeleteProductMutation, useGetAllProductsQuery } from '../../store/product/productApi'
 import { setPageTitle } from '../../store/themeConfigSlice'
-import { ApiErrorResponseDT, ApiSuccessResponseDT, ProductDT } from '../../lib/types'
+import IconEdit from '../Icon/IconEdit'
+import IconPlus from '../Icon/IconPlus'
+import IconTrashLines from '../Icon/IconTrashLines'
 
 const toast = Swal.mixin({
     toast: true,
@@ -207,9 +206,6 @@ const Products = () => {
                                             <div className="flex gap-4 items-center w-max mx-auto">
                                                 <NavLink to={`/products/edit/${id}`} className="flex hover:text-info">
                                                     <IconEdit className="w-4.5 h-4.5" />
-                                                </NavLink>
-                                                <NavLink to={`/products/view/${id}`} className="flex hover:text-primary">
-                                                    <IconEye />
                                                 </NavLink>
                                                 <button type="button" className="flex hover:text-danger" onClick={() => handleDelete(id)}>
                                                     <IconTrashLines />

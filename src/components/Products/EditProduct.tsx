@@ -98,7 +98,14 @@ const EditProduct = () => {
 
         try {
             await updateProduct({ requestBody, productId: id || '0' }).unwrap()
-            toast.fire({ icon: 'success', title: 'Product created successfully!' })
+            toast.fire({ icon: 'success', title: 'Product updated successfully!' })
+
+            setProductName('')
+            setProductPrice(0)
+            setProductDescription('')
+            setProductStock(0)
+            setCategory(null)
+            setImages([]) // Clear image selection
         } catch (error) {
             let errorMessage = 'An error occurred'
             if ((error as any).data) {

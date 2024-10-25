@@ -78,6 +78,13 @@ const CreateProduct = () => {
         try {
             await createProduct(requestBody).unwrap()
             toast.fire({ icon: 'success', title: 'Product created successfully!' })
+
+            setProductName('')
+            setProductPrice(0)
+            setProductDescription('')
+            setProductStock(0)
+            setCategory(null)
+            setImages([]) // Clear image selection
         } catch (error) {
             let errorMessage = 'An error occurred'
             if ((error as any).data) {

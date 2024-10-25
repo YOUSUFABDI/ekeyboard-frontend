@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { ApiErrorResponseDT, ApiSuccessResponseDT, ProductDT } from '../../lib/types'
-import { useDeleteProductMutation, useGetAllProductsQuery } from '../../store/product/productApi'
+import { useDeleteMultipleProductsMutation, useDeleteProductMutation, useGetAllProductsQuery } from '../../store/product/productApi'
 import { setPageTitle } from '../../store/themeConfigSlice'
 import IconEdit from '../Icon/IconEdit'
 import IconPlus from '../Icon/IconPlus'
@@ -25,6 +25,7 @@ const Products = () => {
     const [deleteProduct] = useDeleteProductMutation()
 
     const { data, error, isLoading, isError } = useGetAllProductsQuery()
+    const [deleteMultipleProducts] = useDeleteMultipleProductsMutation()
 
     useEffect(() => {
         dispatch(setPageTitle('Products'))
@@ -48,9 +49,10 @@ const Products = () => {
         }
     }, [data, isError, error, dispatch])
 
-    const deleteRow = (id: any = null) => {
-        if (window.confirm('Are you sure want to delete selected row ?')) {
+    const deleteRow = (id: string | number | null = null) => {
+        if (window.confirm('Are you sure want to delete the selected row?')) {
             const updatedProducts = id ? products.filter((product) => product.id !== id) : products.filter((product) => !selectedRecords.includes(product.id))
+            console.log(updatedProducts)
             setProducts(updatedProducts)
         }
     }
@@ -114,6 +116,46 @@ const Products = () => {
         }
     }
 
+    const handleBulkDelete = async () => {
+        if (selectedRecords.length === 0) {
+            Swal.fire('Error!', 'No products selected for deletion.', 'error')
+            return
+        }
+
+        // Extract product IDs from selected records
+        const validProductIds = selectedRecords.map((product: ProductDT) => product.id).filter((id: number) => id)
+
+        if (validProductIds.length === 0) {
+            Swal.fire('Error!', 'Invalid product IDs.', 'error')
+            return
+        }
+
+        const confirmDelete = await Swal.fire({
+            title: 'Are you sure?',
+            text: `You are about to delete ${validProductIds.length} products!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete them!',
+        })
+
+        if (confirmDelete.isConfirmed) {
+            try {
+                await deleteMultipleProducts(validProductIds).unwrap()
+                Swal.fire('Deleted!', 'The selected products have been deleted.', 'success')
+            } catch (error) {
+                let errorMessage = 'An error occurred'
+                if ((error as any).data) {
+                    const errorData = (error as any).data as ApiErrorResponseDT
+                    errorMessage = errorData.error.message
+                }
+                Swal.fire('Error!', errorMessage, 'error')
+                console.error('Delete failed:', error)
+            }
+        }
+    }
+
     return (
         <div>
             <ul className="flex space-x-2 rtl:space-x-reverse">
@@ -132,7 +174,7 @@ const Products = () => {
                     <div className="invoice-table">
                         <div className="mb-4.5 px-5 flex md:items-center md:flex-row flex-col gap-5">
                             <div className="flex items-center gap-2">
-                                <button type="button" className="btn btn-danger gap-2" onClick={() => deleteRow()}>
+                                <button type="button" className="btn btn-danger gap-2" onClick={handleBulkDelete}>
                                     <IconTrashLines />
                                     Delete
                                 </button>

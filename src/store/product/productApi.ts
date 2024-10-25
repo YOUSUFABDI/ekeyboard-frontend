@@ -56,7 +56,20 @@ export const productApi = createApi({
             }),
             invalidatesTags: ['products'],
         }),
+
+        deleteMultipleProducts: builder.mutation<ApiSuccessResponseDT<null>, number[]>({
+            query: (productIds) => ({
+                url: `/product/remove-many`,
+                method: 'DELETE',
+                body: { productIds },
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+            invalidatesTags: ['products'],
+        }),
     }),
 })
 
-export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation } = productApi
+export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useDeleteMultipleProductsMutation } = productApi

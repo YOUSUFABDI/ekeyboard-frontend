@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-type ProtectedPermistionPropsDT = React.PropsWithChildren
+type ProtectCustomerPropsDT = React.PropsWithChildren
 
-const ProtectedPermistion = ({ children }: ProtectedPermistionPropsDT) => {
+const ProtectCustomer = ({ children }: ProtectCustomerPropsDT) => {
     const role = localStorage.getItem('role')
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (role !== 'admin') {
+        if (role !== 'user') {
             navigate('/not-allowed', { replace: true })
         }
     }, [navigate, role])
@@ -16,4 +16,4 @@ const ProtectedPermistion = ({ children }: ProtectedPermistionPropsDT) => {
     return children
 }
 
-export default ProtectedPermistion
+export default ProtectCustomer

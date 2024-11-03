@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { ApiErrorResponseDT } from '../../lib/types'
 import { IRootState } from '../../store'
 import { useLoginMutation } from '../../store/auth/authApi'
 import { setPageTitle, toggleRTL } from '../../store/themeConfigSlice'
@@ -11,7 +12,6 @@ import IconCaretDown from '../Icon/IconCaretDown'
 import IconEye from '../Icon/IconEye'
 import IconLockDots from '../Icon/IconLockDots'
 import IconMail from '../Icon/IconMail'
-import { ApiErrorResponseDT } from '../../lib/types'
 
 const toast = Swal.mixin({
     toast: true,
@@ -66,7 +66,7 @@ const Login = () => {
 
         const isLogedIn = localStorage.getItem('token')
         if (isLogedIn) {
-            navigate('/')
+            navigate('/dashboard')
         }
     }, [data, error, isError, navigate])
 

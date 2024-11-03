@@ -6,11 +6,8 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { IRootState } from '../../store'
 import { toggleSidebar } from '../../store/themeConfigSlice'
 import IconCaretsDown from '../Icon/IconCaretsDown'
-import IconMenuDashboard from '../Icon/Menu/IconMenuDashboard'
-import IconUser from '../Icon/IconUser'
-import IconUsers from '../Icon/IconUsers'
-import IconSettings from '../Icon/IconSettings'
 import IconMinus from '../Icon/IconMinus'
+import IconMenuDashboard from '../Icon/Menu/IconMenuDashboard'
 
 const Sidebar = () => {
     const [currentMenu, setCurrentMenu] = useState<string>('')
@@ -57,9 +54,9 @@ const Sidebar = () => {
             >
                 <div className="bg-white dark:bg-black h-full">
                     <div className="flex justify-between items-center px-4 py-3">
-                        <NavLink to="/" className="main-logo flex items-center shrink-0">
+                        <NavLink to="/dashboard" className="main-logo flex items-center shrink-0">
                             <img className="w-8 ml-[5px] flex-none" src="/assets/images/logo.svg" alt="logo" />
-                            <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{t('VRISTO')}</span>
+                            <span className="text-2xl ltr:ml-1.5 rtl:mr-1.5 font-semibold align-middle lg:inline dark:text-white-light">{t('Ekeyboard')}</span>
                         </NavLink>
 
                         <button
@@ -75,26 +72,28 @@ const Sidebar = () => {
                             <li className="nav-item">
                                 <ul>
                                     <li className="nav-item">
-                                        <NavLink to="/" className="group">
+                                        <NavLink to="/dashboard" className="group">
                                             <div className="flex items-center">
                                                 <IconMenuDashboard className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Dashboard')}</span>
                                             </div>
                                         </NavLink>
                                     </li>
-                                    <li className="nav-item">
-                                        <NavLink to="/users/profile" className="group">
-                                            <div className="flex items-center">
-                                                <IconMinus className="group-hover:!text-primary shrink-0" />
-                                                <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Profile')}</span>
-                                            </div>
-                                        </NavLink>
-                                    </li>
+
                                     <li className="nav-item">
                                         <NavLink to="/products" className="group">
                                             <div className="flex items-center">
                                                 <IconMinus className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Products')}</span>
+                                            </div>
+                                        </NavLink>
+                                    </li>
+
+                                    <li className="nav-item">
+                                        <NavLink to="/users/profile" className="group">
+                                            <div className="flex items-center">
+                                                <IconMinus className="group-hover:!text-primary shrink-0" />
+                                                <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Profile')}</span>
                                             </div>
                                         </NavLink>
                                     </li>

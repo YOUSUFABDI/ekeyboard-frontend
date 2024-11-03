@@ -8,30 +8,35 @@ const Index = lazy(() => import('../pages/Index'))
 const Profile = lazy(() => import('../pages/ProfilePage/Profile'))
 const Error = lazy(() => import('../components/Error'))
 const ProductPage = lazy(() => import('../pages/ProductsPage/ProductPage'))
-const ProtectedPermistion = lazy(() => import('../components/ProtectPermistion'))
+const ProtectAdmin = lazy(() => import('../components/ProtectAdmin'))
+const ProtectCustomer = lazy(() => import('../components/ProtectCustomer'))
 const EditProductPage = lazy(() => import('../pages/ProductsPage/EditProductPage'))
 
 const routes = [
-    {
-        path: '/login',
-        element: <Login />,
-        layout: 'blank',
-    },
+    // customer routes
     {
         path: '/',
+        element: <h1>Hi hello</h1>,
+        layout: 'blank',
+    },
+    // customer routes
+
+    // dashboard routes
+    {
+        path: '/dashboard',
         element: (
-            <ProtectedPermistion>
+            <ProtectAdmin>
                 <Index />
-            </ProtectedPermistion>
+            </ProtectAdmin>
         ),
     },
     {
         path: '/products',
         element: (
             <ProtectedRoute>
-                <ProtectedPermistion>
+                <ProtectAdmin>
                     <Products />
-                </ProtectedPermistion>
+                </ProtectAdmin>
             </ProtectedRoute>
         ),
     },
@@ -39,9 +44,9 @@ const routes = [
         path: '/products/create',
         element: (
             <ProtectedRoute>
-                <ProtectedPermistion>
+                <ProtectAdmin>
                     <ProductPage />
-                </ProtectedPermistion>
+                </ProtectAdmin>
             </ProtectedRoute>
         ),
     },
@@ -49,21 +54,19 @@ const routes = [
         path: 'product/:id',
         element: (
             <ProtectedRoute>
-                <ProtectedPermistion>
+                <ProtectAdmin>
                     <EditProductPage />
-                </ProtectedPermistion>
+                </ProtectAdmin>
             </ProtectedRoute>
         ),
     },
-
-    // USER
     {
         path: '/users/profile',
         element: (
             <ProtectedRoute>
-                <ProtectedPermistion>
+                <ProtectAdmin>
                     <Profile />
-                </ProtectedPermistion>
+                </ProtectAdmin>
             </ProtectedRoute>
         ),
     },
@@ -71,14 +74,20 @@ const routes = [
         path: '/users/user-account-settings',
         element: (
             <ProtectedRoute>
-                <ProtectedPermistion>
+                <ProtectAdmin>
                     <AccountSetting />
-                </ProtectedPermistion>
+                </ProtectAdmin>
             </ProtectedRoute>
         ),
     },
-    // USER
+    // dashboard routes
 
+    // public routes
+    {
+        path: '/login',
+        element: <Login />,
+        layout: 'blank',
+    },
     {
         path: '/not-allowed',
         element: <NotAllowed />,
@@ -89,6 +98,7 @@ const routes = [
         element: <Error />,
         layout: 'blank',
     },
+    // public routes
 ]
 
 export { routes }

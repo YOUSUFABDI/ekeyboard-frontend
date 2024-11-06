@@ -4,6 +4,7 @@ import NotAllowed from '../pages/NotAllowed'
 const Login = lazy(() => import('../components/Auth/Login'))
 const Products = lazy(() => import('../components/Products/Products'))
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
+const LandingPage = lazy(() => import('../components/LandingPg/LandingPg'))
 const Index = lazy(() => import('../pages/Index'))
 const Profile = lazy(() => import('../pages/ProfilePage/Profile'))
 const Error = lazy(() => import('../components/Error'))
@@ -16,7 +17,7 @@ const routes = [
     // customer routes
     {
         path: '/',
-        element: <h1>Hi hello</h1>,
+        element: <LandingPage />,
         layout: 'blank',
     },
     // customer routes

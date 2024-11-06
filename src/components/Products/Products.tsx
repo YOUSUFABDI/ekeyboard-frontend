@@ -197,7 +197,7 @@ const Products = () => {
                                         accessor: 'id',
                                         sortable: true,
                                         render: ({ id }) => (
-                                            <NavLink to={`/products/${id}`}>
+                                            <NavLink to={`/product/${id}`}>
                                                 <div className="text-primary underline hover:no-underline font-semibold">{`#${id}`}</div>
                                             </NavLink>
                                         ),

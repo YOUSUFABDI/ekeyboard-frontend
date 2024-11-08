@@ -1,6 +1,8 @@
 import { lazy } from 'react'
 import AccountSetting from '../components/Profile/AccountSetting'
 import NotAllowed from '../pages/NotAllowed'
+import CusProductsPage from '../pages/CusProductsPage/CusProductsPage'
+import PublicLayout from '../components/Layouts/PublicLayout'
 const Login = lazy(() => import('../components/Auth/Login'))
 const Products = lazy(() => import('../components/Products/Products'))
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
@@ -14,11 +16,55 @@ const ProtectCustomer = lazy(() => import('../components/ProtectCustomer'))
 const EditProductPage = lazy(() => import('../pages/ProductsPage/EditProductPage'))
 
 const routes = [
-    // customer routes
+    // public routes
     {
         path: '/',
-        element: <LandingPage />,
+        element: (
+            <PublicLayout>
+                <LandingPage />
+            </PublicLayout>
+        ),
+        layout: 'public',
+    },
+    {
+        path: '/products',
+        element: (
+            <PublicLayout>
+                <CusProductsPage />
+            </PublicLayout>
+        ),
+        layout: 'public',
+    },
+    {
+        path: '/login',
+        element: <Login />,
         layout: 'blank',
+    },
+    {
+        path: '/not-allowed',
+        element: <NotAllowed />,
+        layout: 'blank',
+    },
+    {
+        path: '*',
+        element: <Error />,
+        layout: 'blank',
+    },
+    // public routes
+
+    // customer routes
+    {
+        path: '/cust/profile',
+        element: (
+            <PublicLayout>
+                <ProtectedRoute>
+                    <ProtectCustomer>
+                        <h1>Cus profile</h1>
+                    </ProtectCustomer>
+                </ProtectedRoute>
+            </PublicLayout>
+        ),
+        layout: 'public',
     },
     // customer routes
 
@@ -82,24 +128,6 @@ const routes = [
         ),
     },
     // dashboard routes
-
-    // public routes
-    {
-        path: '/login',
-        element: <Login />,
-        layout: 'blank',
-    },
-    {
-        path: '/not-allowed',
-        element: <NotAllowed />,
-        layout: 'blank',
-    },
-    {
-        path: '*',
-        element: <Error />,
-        layout: 'blank',
-    },
-    // public routes
 ]
 
 export { routes }

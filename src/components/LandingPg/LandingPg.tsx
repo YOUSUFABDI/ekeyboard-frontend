@@ -1,9 +1,7 @@
-import PublicHeader from '../Layouts/PublicHeader'
-
 const LandingPg = () => {
     return (
         <div className="">
-            <PublicHeader />
+            <h1>Landing page</h1>
         </div>
     )
 }

@@ -81,7 +81,7 @@ const Sidebar = () => {
                                     </li>
 
                                     <li className="nav-item">
-                                        <NavLink to="/products" className="group">
+                                        <NavLink to="/dash-products" className="group">
                                             <div className="flex items-center">
                                                 <IconMinus className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Products')}</span>
@@ -90,7 +90,7 @@ const Sidebar = () => {
                                     </li>
 
                                     <li className="nav-item">
-                                        <NavLink to="/users/profile" className="group">
+                                        <NavLink to="/dash-users/profile" className="group">
                                             <div className="flex items-center">
                                                 <IconMinus className="group-hover:!text-primary shrink-0" />
                                                 <span className="ltr:pl-3 rtl:pr-3 text-black dark:text-[#506690] dark:group-hover:text-white-dark">{t('Profile')}</span>

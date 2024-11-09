@@ -66,7 +66,12 @@ const Login = () => {
 
         const isLogedIn = localStorage.getItem('token')
         if (isLogedIn) {
-            navigate('/dashboard')
+            const role = localStorage.getItem('role')
+            if (role === 'admin') {
+                navigate('/dashboard')
+            } else {
+                navigate('/')
+            }
         }
     }, [data, error, isError, navigate])
 

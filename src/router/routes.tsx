@@ -78,7 +78,7 @@ const routes = [
         ),
     },
     {
-        path: '/products',
+        path: '/dash-products',
         element: (
             <ProtectedRoute>
                 <ProtectAdmin>
@@ -88,7 +88,7 @@ const routes = [
         ),
     },
     {
-        path: '/products/create',
+        path: '/dash-products/create',
         element: (
             <ProtectedRoute>
                 <ProtectAdmin>
@@ -98,7 +98,7 @@ const routes = [
         ),
     },
     {
-        path: 'product/:id',
+        path: '/dash-product/:id',
         element: (
             <ProtectedRoute>
                 <ProtectAdmin>
@@ -108,7 +108,7 @@ const routes = [
         ),
     },
     {
-        path: '/users/profile',
+        path: '/dash-users/profile',
         element: (
             <ProtectedRoute>
                 <ProtectAdmin>
@@ -118,7 +118,7 @@ const routes = [
         ),
     },
     {
-        path: '/users/user-account-settings',
+        path: '/dash-users/user-account-settings',
         element: (
             <ProtectedRoute>
                 <ProtectAdmin>

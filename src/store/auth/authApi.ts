@@ -18,6 +18,7 @@ export const authApi = createApi({
                     contentType: 'application/json',
                 }
             },
+            invalidatesTags: ['auth'],
         }),
 
         signup: builder.mutation<AuthResponse, { formData: any }>({

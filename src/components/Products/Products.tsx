@@ -178,7 +178,7 @@ const Products = () => {
                                     <IconTrashLines />
                                     Delete
                                 </button>
-                                <Link to="/products/create" className="btn btn-primary gap-2">
+                                <Link to="/dash-products/create" className="btn btn-primary gap-2">
                                     <IconPlus />
                                     Add New
                                 </Link>
@@ -197,7 +197,7 @@ const Products = () => {
                                         accessor: 'id',
                                         sortable: true,
                                         render: ({ id }) => (
-                                            <NavLink to={`/product/${id}`}>
+                                            <NavLink to={`/dash-product/${id}`}>
                                                 <div className="text-primary underline hover:no-underline font-semibold">{`#${id}`}</div>
                                             </NavLink>
                                         ),
@@ -246,7 +246,7 @@ const Products = () => {
                                         textAlignment: 'center',
                                         render: ({ id }) => (
                                             <div className="flex gap-4 items-center w-max mx-auto">
-                                                <NavLink to={`/product/${id}`} className="flex hover:text-info">
+                                                <NavLink to={`/dash-product/${id}`} className="flex hover:text-info">
                                                     <IconEdit className="w-4.5 h-4.5" />
                                                 </NavLink>
                                                 <button type="button" className="flex hover:text-danger" onClick={() => handleDelete(id)}>

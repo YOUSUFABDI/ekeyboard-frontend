@@ -12,7 +12,6 @@ import IconCaretDown from '../Icon/IconCaretDown'
 import IconEye from '../Icon/IconEye'
 import IconLockDots from '../Icon/IconLockDots'
 import IconMail from '../Icon/IconMail'
-import { setUser } from '../../store/slices/authSlice'
 
 const toast = Swal.mixin({
     toast: true,
@@ -61,11 +60,8 @@ const Login = () => {
             localStorage.setItem('token', token)
             localStorage.setItem('role', role)
 
-            if (data.payload.data.user) {
-                dispatch(setUser(data.payload.data.user))
-            }
-
             navigate(role === 'admin' ? '/dashboard' : '/')
+            window.location.reload()
         }
     }, [data, error, isError, navigate, dispatch])
 

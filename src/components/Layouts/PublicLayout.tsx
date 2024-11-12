@@ -9,7 +9,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
     return (
         <div className="">
             <PublicHeader />
-            <main className="px-5 mt-5">{children}</main>
+            <main className=" w-[1440px] mx-auto">{children}</main>
         </div>
     )
 }

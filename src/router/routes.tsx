@@ -36,6 +36,24 @@ const routes = [
         layout: 'public',
     },
     {
+        path: '/about-us',
+        element: (
+            <PublicLayout>
+                <h1>about us</h1>
+            </PublicLayout>
+        ),
+        layout: 'public',
+    },
+    {
+        path: '/contact-us',
+        element: (
+            <PublicLayout>
+                <h1>contact us</h1>
+            </PublicLayout>
+        ),
+        layout: 'public',
+    },
+    {
         path: '/login',
         element: <Login />,
         layout: 'blank',

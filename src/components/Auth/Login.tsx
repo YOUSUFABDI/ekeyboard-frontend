@@ -12,6 +12,7 @@ import IconCaretDown from '../Icon/IconCaretDown'
 import IconEye from '../Icon/IconEye'
 import IconLockDots from '../Icon/IconLockDots'
 import IconMail from '../Icon/IconMail'
+import { setUser } from '../../store/slices/authSlice'
 
 const toast = Swal.mixin({
     toast: true,
@@ -55,25 +56,18 @@ const Login = () => {
             })
         }
 
-        const token = data && data.payload?.data.token
-        const role = data && data.payload?.data.role
-        if (token) {
+        if (data?.payload?.data?.token) {
+            const { token, role } = data.payload.data
             localStorage.setItem('token', token)
-        }
-        if (role) {
             localStorage.setItem('role', role)
-        }
 
-        const isLogedIn = localStorage.getItem('token')
-        if (isLogedIn) {
-            const role = localStorage.getItem('role')
-            if (role === 'admin') {
-                navigate('/dashboard')
-            } else {
-                navigate('/')
+            if (data.payload.data.user) {
+                dispatch(setUser(data.payload.data.user))
             }
+
+            navigate(role === 'admin' ? '/dashboard' : '/')
         }
-    }, [data, error, isError, navigate])
+    }, [data, error, isError, navigate, dispatch])
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false
     const themeConfig = useSelector((state: IRootState) => state.themeConfig)

@@ -52,7 +52,18 @@ const PublicHeader = () => {
     }, [data, isError, error])
 
     const logout = () => {
-        window.localStorage.clear()
+        // Clear the local storage token and reset user state to null
+        window.localStorage.removeItem('token')
+        setUser(null) // This triggers a re-render of the component
+
+        // Provide feedback to the user
+        toast.fire({
+            icon: 'success',
+            title: 'You have been logged out.',
+            padding: '2em',
+        })
+
+        // Navigate to the home page without refreshing
         navigate('/')
     }
 

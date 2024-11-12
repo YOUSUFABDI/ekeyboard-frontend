@@ -38,7 +38,7 @@ export interface UserDT {
     createdDT: string
 }
 
-export type AuthResponse = ApiResponseDT<{ data: { token: string; role: string } }>
+export type AuthResponse = ApiResponseDT<{ data: { token: string; role: string; user?: UserDT } }>
 
 export type GetAuthenticatedUserResponseDT = ApiResponseDT<{ user: UserDT | null }>
 

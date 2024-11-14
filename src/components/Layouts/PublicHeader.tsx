@@ -125,7 +125,7 @@ const PublicHeader = () => {
                             )
                         }
                     >
-                        <ul className="text-dark dark:text-white-dark !py-0 w-[230px] font-semibold dark:text-white-light/90">
+                        <ul className="text-dark dark:text-white-dark !py-0 w-[230px] font-semibold dark:text-white-light/90 bg-gray-100 dark:bg-[#0E1726]">
                             {token && user ? (
                                 <>
                                     <li>
@@ -139,16 +139,16 @@ const PublicHeader = () => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <Link to="/users/profile" className="dark:hover:text-white">
+                                    <li className="ltr:pl-4 rtl:pr-4">
+                                        <Link to="/users/profile" className="dark:hover:text-white flex">
                                             <IconUser className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
-                                            Profile
+                                            <span>Profile</span>
                                         </Link>
                                     </li>
-                                    <li className="border-t border-white-light dark:border-white-light/10">
-                                        <button onClick={logout} className="text-danger !py-3">
+                                    <li className="border-t border-white-light dark:border-white-light/10 ltr:pl-4 rtl:pr-4 mt-3">
+                                        <button onClick={logout} className="text-danger !py-3 flex">
                                             <IconLogout className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 rotate-90 shrink-0" />
-                                            Sign Out
+                                            <span>Sign Out</span>
                                         </button>
                                     </li>
                                 </>

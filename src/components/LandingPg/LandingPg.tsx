@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const LandingPg = () => {
     return (
         <main className="w-full">
@@ -6,16 +8,16 @@ const LandingPg = () => {
                     <div>
                         <span className="text-4xl font-bold">Product Collection</span>
                         <p className="text-xl mt-4 w-full lg:w-[609px]">
-                            Welcome to our online fashion haven, where we invite you to embark on a thrilling journey of discovery. We understand that fashion is an expression of your unique
-                            personality, and we've curated an extensive collection of dresses, shoes, and more to help you find your new favorites.
+                            Welcome to our online shop, where we invite you to embark on a thrilling journey of discovery. we've curated an extensive collection of keyboards, and more to help you find
+                            your new favorites.
                         </p>
                     </div>
-                    <button type="button" className="btn btn-primary mt-6">
+                    <Link to={'/products'} className="btn btn-primary mt-6 w-fit">
                         Shop Now
-                    </button>
+                    </Link>
                 </div>
                 <div className="flex-1 mt-16 ">
-                    <img className="object-cover rounded-lg w-full" src="https://media.wired.com/photos/638a55ca7c1b7d0edd58fde5/master/pass/MacTigr-Das-Keyboard-Gear.jpg" alt="" />
+                    <img className="object-cover rounded-lg w-full" src="https://cdn.thewirecutter.com/wp-content/media/2024/04/mechanicalkeyboards-2048px-1361.jpg" alt="" />
                 </div>
             </section>
         </main>

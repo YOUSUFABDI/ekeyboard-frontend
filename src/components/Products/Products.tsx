@@ -25,6 +25,7 @@ const Products = () => {
     const [deleteProduct] = useDeleteProductMutation()
 
     const { data, error, isLoading, isError } = useGetAllProductsQuery()
+
     const [deleteMultipleProducts] = useDeleteMultipleProductsMutation()
 
     useEffect(() => {

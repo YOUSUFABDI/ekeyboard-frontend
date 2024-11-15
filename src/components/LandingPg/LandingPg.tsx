@@ -16,7 +16,7 @@ const LandingPg = () => {
                         Shop Now
                     </Link>
                 </div>
-                <div className="flex-1 mt-16 ">
+                <div className="flex-1  ">
                     <img className="object-cover rounded-lg w-full" src="https://cdn.thewirecutter.com/wp-content/media/2024/04/mechanicalkeyboards-2048px-1361.jpg" alt="" />
                 </div>
             </section>

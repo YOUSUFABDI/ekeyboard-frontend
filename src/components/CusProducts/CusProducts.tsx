@@ -41,13 +41,12 @@ const CusProducts = () => {
         if (data && data.payload && !data.error) {
             const response = data as ApiSuccessResponseDT<ProductDT[]>
             setProducts(response.payload.data) // Set products state with API data
-            console.log(products)
         }
     }, [data, isError, error, dispatch])
 
     return (
-        <section>
-            <div className="flex flex-col gap-5">
+        <main>
+            <section className="flex flex-col gap-5">
                 <div className="flex items-center justify-between">
                     <span>All Product Categories</span>
 
@@ -68,8 +67,8 @@ const CusProducts = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {isLoading ? Array.from({ length: 3 }).map((_, index) => <SkeletonCard key={index} />) : products.map((product) => <CusProduct key={product.id} product={product} />)}
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
     )
 }
 

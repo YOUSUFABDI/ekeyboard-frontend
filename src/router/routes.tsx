@@ -1,8 +1,7 @@
 import { lazy } from 'react'
-import AccountSetting from '../components/Profile/AccountSetting'
-import NotAllowed from '../pages/NotAllowed'
-import CusProductsPage from '../pages/CusProductsPage/CusProductsPage'
-import PublicLayout from '../components/Layouts/PublicLayout'
+const AccountSetting = lazy(() => import('../components/Profile/AccountSetting'))
+const NotAllowed = lazy(() => import('../pages/NotAllowed'))
+const PublicLayout = lazy(() => import('../components/Layouts/PublicLayout'))
 const Login = lazy(() => import('../components/Auth/Login'))
 const Products = lazy(() => import('../components/Products/Products'))
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
@@ -14,6 +13,8 @@ const ProductPage = lazy(() => import('../pages/ProductsPage/ProductPage'))
 const ProtectAdmin = lazy(() => import('../components/ProtectAdmin'))
 const ProtectCustomer = lazy(() => import('../components/ProtectCustomer'))
 const EditProductPage = lazy(() => import('../pages/ProductsPage/EditProductPage'))
+const CusProductsPage = lazy(() => import('../pages/CusProductsPage/CusProductsPage'))
+const ViewCusProductPage = lazy(() => import('../pages/CusProductsPage/ViewCusProductPage'))
 
 const routes = [
     // public routes
@@ -31,6 +32,15 @@ const routes = [
         element: (
             <PublicLayout>
                 <CusProductsPage />
+            </PublicLayout>
+        ),
+        layout: 'public',
+    },
+    {
+        path: '/product/:id',
+        element: (
+            <PublicLayout>
+                <ViewCusProductPage />
             </PublicLayout>
         ),
         layout: 'public',

@@ -64,6 +64,7 @@ export type ProductDT = {
     createdDT: string
     categoryId: number
     images: ImageDT[]
+    quantity: number
 }
 
 export type CategoryDT = {
@@ -96,4 +97,9 @@ export type UpdateProductRequestDT = {
     productImage: string[]
     productStock: number
     categoryId: number
+}
+
+export type MakeOrderRequestDT = {
+    productID: string
+    quantity: number
 }

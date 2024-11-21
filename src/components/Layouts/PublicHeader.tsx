@@ -34,6 +34,8 @@ const PublicHeader = () => {
 
     const isActiveLink = (path: string) => location.pathname === path
 
+    const cartItems = useSelector((state: IRootState) => state.cart.items)
+
     useEffect(() => {
         dispatch(setPageTitle('Home'))
 
@@ -105,9 +107,10 @@ const PublicHeader = () => {
                         {themeConfig.theme === 'system' && <IconLaptop />}
                     </button>
 
-                    <button className="flex items-center p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60">
+                    <Link to="/product/cart" className="relative flex items-center p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60">
                         <IconShoppingCart />
-                    </button>
+                        <span className="bg-danger text-white absolute right-0 top-0 w-4 h-4 rounded-full text-center flex items-center justify-center font-bold"> {cartItems.length}</span>
+                    </Link>
 
                     <Dropdown
                         offset={[0, 8]}
@@ -184,9 +187,10 @@ const PublicHeader = () => {
                         {themeConfig.theme === 'system' && <IconLaptop />}
                     </button>
 
-                    <button className="flex items-center p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60">
+                    <Link to="/product/cart" className="relative flex items-center p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60">
                         <IconShoppingCart />
-                    </button>
+                        <span className="bg-danger text-white absolute right-0 top-0 w-4 h-4 rounded-full text-center flex items-center justify-center font-bold">0</span>
+                    </Link>
 
                     <Dropdown
                         offset={[0, 8]}

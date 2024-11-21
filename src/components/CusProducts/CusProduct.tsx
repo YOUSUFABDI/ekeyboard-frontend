@@ -3,12 +3,20 @@ import { ProductDT } from '../../lib/types'
 import { Link } from 'react-router-dom'
 import IconPlus from '../Icon/IconPlus'
 import IconHeart from '../Icon/IconHeart'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../store/order/cartSlice'
 
 interface CusProductProps {
     product: ProductDT
 }
 
 const CusProduct: React.FC<CusProductProps> = ({ product }) => {
+    const dispatch = useDispatch()
+
+    const handleAddToCart = () => {
+        dispatch(addToCart(product))
+    }
+
     return (
         <div key={product.id} className="flex items-center justify-center">
             <div className="w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
@@ -23,7 +31,7 @@ const CusProduct: React.FC<CusProductProps> = ({ product }) => {
                     <p className="text-white-dark">{product.description}</p>
 
                     <div className="flex items-center justify-between">
-                        <button className="btn btn-primary mt-6">
+                        <button className="btn btn-primary mt-6" onClick={handleAddToCart}>
                             <IconPlus />
                         </button>
                         <button className="text-white-dark flex items-center gap-2">

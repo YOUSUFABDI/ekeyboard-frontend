@@ -15,6 +15,7 @@ const ProtectCustomer = lazy(() => import('../components/ProtectCustomer'))
 const EditProductPage = lazy(() => import('../pages/ProductsPage/EditProductPage'))
 const CusProductsPage = lazy(() => import('../pages/CusProductsPage/CusProductsPage'))
 const ViewCusProductPage = lazy(() => import('../pages/CusProductsPage/ViewCusProductPage'))
+const CusCartPage = lazy(() => import('../pages/CusProductsPage/CusCartPage'))
 
 const routes = [
     // public routes
@@ -41,6 +42,15 @@ const routes = [
         element: (
             <PublicLayout>
                 <ViewCusProductPage />
+            </PublicLayout>
+        ),
+        layout: 'public',
+    },
+    {
+        path: '/product/cart',
+        element: (
+            <PublicLayout>
+                <CusCartPage />
             </PublicLayout>
         ),
         layout: 'public',

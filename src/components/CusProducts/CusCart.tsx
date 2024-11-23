@@ -105,7 +105,7 @@ const CusCart = () => {
                 <div>
                     <ul className="space-y-4">
                         {cartItems.map((item) => (
-                            <li key={item.id} className="flex items-center justify-between bg-white p-4 rounded shadow-sm">
+                            <li key={item.id} className="flex items-center justify-between bg-white dark:bg-dark-dark-light p-4 rounded shadow-sm">
                                 <div className="flex items-center gap-4">
                                     <img src={item.images[0]?.imageUrl} alt={item.name} className="w-16 h-16 object-cover rounded" />
                                     <div>

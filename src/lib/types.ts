@@ -65,6 +65,7 @@ export type ProductDT = {
     categoryId: number
     images: ImageDT[]
     quantity: number
+    isLiked: boolean
 }
 
 export type CategoryDT = {

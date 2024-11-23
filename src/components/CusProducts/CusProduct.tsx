@@ -31,9 +31,9 @@ const CusProduct: React.FC<CusProductProps> = ({ product }) => {
                     <p className="text-white-dark">{product.description}</p>
 
                     <div className="flex items-center justify-between">
-                        <button className="btn btn-primary mt-6" onClick={handleAddToCart}>
+                        <Link to={'/product/cart'} className="btn btn-primary mt-6" onClick={handleAddToCart}>
                             <IconPlus />
-                        </button>
+                        </Link>
                         <button className="text-white-dark flex items-center gap-2">
                             <IconHeart fill className="text-danger" />
                             <span>{product.likes}</span>

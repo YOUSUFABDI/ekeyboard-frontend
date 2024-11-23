@@ -69,7 +69,18 @@ export const productApi = createApi({
             }),
             invalidatesTags: ['products'],
         }),
+
+        likeProduct: builder.mutation<ApiSuccessResponseDT<ProductDT>, string>({
+            query: (productId) => ({
+                url: `/product/like/${productId}`,
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+            invalidatesTags: ['products'],
+        }),
     }),
 })
 
-export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useDeleteMultipleProductsMutation } = productApi
+export const { useGetAllProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useDeleteMultipleProductsMutation, useLikeProductMutation } = productApi

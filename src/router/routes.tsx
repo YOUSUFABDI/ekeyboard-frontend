@@ -4,6 +4,7 @@ const NotAllowed = lazy(() => import('../pages/NotAllowed'))
 const PublicLayout = lazy(() => import('../components/Layouts/PublicLayout'))
 const Login = lazy(() => import('../components/Auth/Login'))
 const Products = lazy(() => import('../components/Products/Products'))
+const OrdersPage = lazy(() => import('../pages/OrdersPage/OrdersPage'))
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
 const LandingPage = lazy(() => import('../components/LandingPg/LandingPg'))
 const Index = lazy(() => import('../pages/Index'))
@@ -141,6 +142,16 @@ const routes = [
             <ProtectedRoute>
                 <ProtectAdmin>
                     <EditProductPage />
+                </ProtectAdmin>
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: '/dash-users/orders',
+        element: (
+            <ProtectedRoute>
+                <ProtectAdmin>
+                    <OrdersPage />
                 </ProtectAdmin>
             </ProtectedRoute>
         ),

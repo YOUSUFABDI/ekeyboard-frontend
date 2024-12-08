@@ -104,3 +104,23 @@ export type MakeOrderRequestDT = {
     productID: string
     quantity: number
 }
+
+export type OrderDT = {
+    id: number
+    userId: number
+    productId: number
+    quantity: number
+    status: string
+    createdDT: string
+    user: {
+        id: number
+        fullName: string
+        email: string
+        phone: string
+    }
+    product: {
+        id: number
+        name: string
+        price: number
+    }
+}

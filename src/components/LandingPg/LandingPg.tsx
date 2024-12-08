@@ -70,7 +70,7 @@ const LandingPg = () => {
                     <h5 className="text-[#3b3f5c] text-xl font-semibold mb-4 dark:text-white-light">Products</h5>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                     {isLoading ? Array.from({ length: 6 }).map((_, index) => <SkeletonCard key={index} />) : products.map((product) => <CusProduct key={product.id} product={product} />)}
                 </div>
             </section>

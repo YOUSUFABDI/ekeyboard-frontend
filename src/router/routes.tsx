@@ -17,6 +17,7 @@ const EditProductPage = lazy(() => import('../pages/ProductsPage/EditProductPage
 const CusProductsPage = lazy(() => import('../pages/CusProductsPage/CusProductsPage'))
 const ViewCusProductPage = lazy(() => import('../pages/CusProductsPage/ViewCusProductPage'))
 const CusCartPage = lazy(() => import('../pages/CusProductsPage/CusCartPage'))
+const CusProfilePage = lazy(() => import('../pages/CusProfilePage/CusProfilePage'))
 
 const routes = [
     // public routes
@@ -98,7 +99,7 @@ const routes = [
             <PublicLayout>
                 <ProtectedRoute>
                     <ProtectCustomer>
-                        <h1>Cus profile</h1>
+                        <CusProfilePage />
                     </ProtectCustomer>
                 </ProtectedRoute>
             </PublicLayout>

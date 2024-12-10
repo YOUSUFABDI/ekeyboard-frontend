@@ -143,7 +143,7 @@ const PublicHeader = () => {
                                         </div>
                                     </li>
                                     <li className="ltr:pl-4 rtl:pr-4">
-                                        <Link to="/users/profile" className="dark:hover:text-white flex">
+                                        <Link to="/cust/profile" className="dark:hover:text-white flex">
                                             <IconUser className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
                                             <span>Profile</span>
                                         </Link>
@@ -229,7 +229,7 @@ const PublicHeader = () => {
                             {token && user ? (
                                 <>
                                     <li>
-                                        <Link to="/users/profile" className="dark:hover:text-white">
+                                        <Link to="/cust/profile" className="dark:hover:text-white">
                                             <IconUser className="w-4.5 h-4.5 ltr:mr-2 rtl:ml-2 shrink-0" />
                                             Profile
                                         </Link>

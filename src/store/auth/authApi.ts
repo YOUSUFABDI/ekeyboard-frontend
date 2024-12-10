@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { AuthResponse, GetAuthenticatedUserResponseDT } from '../../lib/types'
+import { ApiSuccessResponseDT, AuthResponse, GetAuthenticatedUserResponseDT, UserDT } from '../../lib/types'
 import { API } from '../api'
+import { url } from 'inspector'
 
 const token = localStorage.getItem('token')
 
@@ -73,7 +74,19 @@ export const authApi = createApi({
             },
             invalidatesTags: ['auth'],
         }),
+
+        changeProfileImg: builder.mutation<ApiSuccessResponseDT<UserDT>, { profileImg: string }>({
+            query: ({ profileImg }) => ({
+                url: '/auth/change-profile-img',
+                method: 'PUT',
+                body: { profileImg },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+            invalidatesTags: ['auth'],
+        }),
     }),
 })
 
-export const { useLoginMutation, useSignupMutation, useGetAuthenticatedUserQuery, useUpdatePasswordMutation, useUpdateAdminInfoMutation } = authApi
+export const { useLoginMutation, useSignupMutation, useGetAuthenticatedUserQuery, useUpdatePasswordMutation, useUpdateAdminInfoMutation, useChangeProfileImgMutation } = authApi

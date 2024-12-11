@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API } from '../api'
+import { RecentOrdersResponse } from '../../lib/types'
 
 const token = localStorage.getItem('token')
 
@@ -57,7 +58,17 @@ export const dashboardApi = createApi({
             }),
             providesTags: ['dashboardApi'],
         }),
+        getRecentOrders: builder.query<RecentOrdersResponse, number>({
+            query: (limit = 10) => ({
+                url: `/dashboard/recent-orders?limit=${limit}`,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+            providesTags: ['dashboardApi'],
+        }),
     }),
 })
 
-export const { useGetTopSellingProductsQuery } = dashboardApi
+export const { useGetTopSellingProductsQuery, useGetRecentOrdersQuery } = dashboardApi

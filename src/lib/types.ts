@@ -124,3 +124,21 @@ export type OrderDT = {
         price: number
     }
 }
+
+export interface RecentOrder {
+    orderId: number
+    customerName: string
+    productName: string
+    orderPrice: number
+    orderStatus: string
+    orderDate: string
+}
+
+export interface RecentOrdersResponse {
+    statusCode: number // The status code from the response
+    payload: {
+        message: string // The message in the response
+        data: RecentOrder[] // The array of recent orders
+    }
+    error: null | string // If there are errors
+}

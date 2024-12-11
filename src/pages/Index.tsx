@@ -10,7 +10,7 @@ import IconMultipleForwardRight from '../components/Icon/IconMultipleForwardRigh
 import IconShoppingCart from '../components/Icon/IconShoppingCart'
 import IconTag from '../components/Icon/IconTag'
 import { IRootState } from '../store'
-import { useGetTopSellingProductsQuery } from '../store/dashboard/dashboard'
+import { useGetRecentOrdersQuery, useGetTopSellingProductsQuery } from '../store/dashboard/dashboard'
 import { setPageTitle } from '../store/themeConfigSlice'
 
 const Index = () => {
@@ -198,106 +198,9 @@ const Index = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">
-                    <div className="panel h-full w-full">
-                        <div className="flex items-center justify-between mb-5">
-                            <h5 className="font-semibold text-lg dark:text-white-light">Recent Orders</h5>
-                        </div>
-                        <div className="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th className="ltr:rounded-l-md rtl:rounded-r-md">Customer</th>
-                                        <th>Product</th>
-                                        <th>Invoice</th>
-                                        <th>Price</th>
-                                        <th className="ltr:rounded-r-md rtl:rounded-l-md">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr className="text-white-dark hover:text-black dark:hover:text-white-light/90 group">
-                                        <td className="min-w-[150px] text-black dark:text-white">
-                                            <div className="flex items-center">
-                                                <img className="w-8 h-8 rounded-md ltr:mr-3 rtl:ml-3 object-cover" src="/assets/images/profile-6.jpeg" alt="avatar" />
-                                                <span className="whitespace-nowrap">Luke Ivory</span>
-                                            </div>
-                                        </td>
-                                        <td className="text-primary">Headphone</td>
-                                        <td>
-                                            <Link to="/apps/invoice/preview">#46894</Link>
-                                        </td>
-                                        <td>$56.07</td>
-                                        <td>
-                                            <span className="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span>
-                                        </td>
-                                    </tr>
-                                    <tr className="text-white-dark hover:text-black dark:hover:text-white-light/90 group">
-                                        <td className="text-black dark:text-white">
-                                            <div className="flex items-center">
-                                                <img className="w-8 h-8 rounded-md ltr:mr-3 rtl:ml-3 object-cover" src="/assets/images/profile-7.jpeg" alt="avatar" />
-                                                <span className="whitespace-nowrap">Andy King</span>
-                                            </div>
-                                        </td>
-                                        <td className="text-info">Nike Sport</td>
-                                        <td>
-                                            <Link to="/apps/invoice/preview">#76894</Link>
-                                        </td>
-                                        <td>$126.04</td>
-                                        <td>
-                                            <span className="badge bg-secondary shadow-md dark:group-hover:bg-transparent">Shipped</span>
-                                        </td>
-                                    </tr>
-                                    <tr className="text-white-dark hover:text-black dark:hover:text-white-light/90 group">
-                                        <td className="text-black dark:text-white">
-                                            <div className="flex items-center">
-                                                <img className="w-8 h-8 rounded-md ltr:mr-3 rtl:ml-3 object-cover" src="/assets/images/profile-8.jpeg" alt="avatar" />
-                                                <span className="whitespace-nowrap">Laurie Fox</span>
-                                            </div>
-                                        </td>
-                                        <td className="text-warning">Sunglasses</td>
-                                        <td>
-                                            <Link to="/apps/invoice/preview">#66894</Link>
-                                        </td>
-                                        <td>$56.07</td>
-                                        <td>
-                                            <span className="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span>
-                                        </td>
-                                    </tr>
-                                    <tr className="text-white-dark hover:text-black dark:hover:text-white-light/90 group">
-                                        <td className="text-black dark:text-white">
-                                            <div className="flex items-center">
-                                                <img className="w-8 h-8 rounded-md ltr:mr-3 rtl:ml-3 object-cover" src="/assets/images/profile-9.jpeg" alt="avatar" />
-                                                <span className="whitespace-nowrap">Ryan Collins</span>
-                                            </div>
-                                        </td>
-                                        <td className="text-danger">Sport</td>
-                                        <td>
-                                            <Link to="/apps/invoice/preview">#75844</Link>
-                                        </td>
-                                        <td>$110.00</td>
-                                        <td>
-                                            <span className="badge bg-secondary shadow-md dark:group-hover:bg-transparent">Shipped</span>
-                                        </td>
-                                    </tr>
-                                    <tr className="text-white-dark hover:text-black dark:hover:text-white-light/90 group">
-                                        <td className="text-black dark:text-white">
-                                            <div className="flex items-center">
-                                                <img className="w-8 h-8 rounded-md ltr:mr-3 rtl:ml-3 object-cover" src="/assets/images/profile-10.jpeg" alt="avatar" />
-                                                <span className="whitespace-nowrap">Irene Collins</span>
-                                            </div>
-                                        </td>
-                                        <td className="text-secondary">Speakers</td>
-                                        <td>
-                                            <Link to="/apps/invoice/preview">#46894</Link>
-                                        </td>
-                                        <td>$56.07</td>
-                                        <td>
-                                            <span className="badge bg-success shadow-md dark:group-hover:bg-transparent">Paid</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    {/* recent otders */}
+                    <RecentOrdersPanel />
+                    {/* recent otders */}
 
                     {/*Top Selling Product  */}
                     <TopSellingProductsPanel />
@@ -348,6 +251,59 @@ const TopSellingProductsPanel: React.FC = () => {
                                 <td>${item.product.price}</td>
                                 <td>{item.totalSold}</td>
                                 <td>{item.product.category.name || 'General'}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
+}
+
+const RecentOrdersPanel: React.FC = () => {
+    const { data, error, isLoading } = useGetRecentOrdersQuery(10) // Fetch 10 recent orders
+
+    if (isLoading) return <p>Loading...</p>
+    if (error) return <p>Error loading recent orders</p>
+    if (!data?.payload?.data?.length) return <p>No orders found.</p>
+
+    return (
+        <div className="panel h-full w-full">
+            <div className="flex items-center justify-between mb-5">
+                <h5 className="font-semibold text-lg dark:text-white-light">Recent Orders</h5>
+            </div>
+            <div className="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className="ltr:rounded-l-md rtl:rounded-r-md">Customer</th>
+                            <th>Product</th>
+                            <th>Invoice</th>
+                            <th>Price</th>
+                            <th className="ltr:rounded-r-md rtl:rounded-l-md">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data?.payload?.data.map((order) => (
+                            <tr key={order.orderId} className="text-white-dark hover:text-black dark:hover:text-white-light/90 group">
+                                <td className="min-w-[150px] text-black dark:text-white">
+                                    <div className="flex items-center">
+                                        <img
+                                            className="w-8 h-8 rounded-md ltr:mr-3 rtl:ml-3 object-cover"
+                                            src="/assets/images/profile-6.jpeg" // You can add dynamic images if you have them
+                                            alt="avatar"
+                                        />
+                                        <span className="whitespace-nowrap">{order.customerName}</span>
+                                    </div>
+                                </td>
+                                <td className="text-primary">{order.productName}</td>
+                                <td>
+                                    <Link to="/apps/invoice/preview">#{order.orderId}</Link> {/* Dynamic invoice link */}
+                                </td>
+                                <td>${order.orderPrice.toFixed(2)}</td> {/* Formatting price */}
+                                <td>
+                                    <span className={`badge ${order.orderStatus === 'Paid' ? 'bg-success' : 'bg-secondary'} shadow-md dark:group-hover:bg-transparent`}>{order.orderStatus}</span>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

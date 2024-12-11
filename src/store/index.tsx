@@ -4,6 +4,7 @@ import { authApi } from './auth/authApi'
 import { productApi } from './product/productApi'
 import { categoryApi } from './category/categoryApi'
 import { orderApi } from './order/OrderApi'
+import { dashboardApi } from './dashboard/dashboard'
 import cartReducer from './order/cartSlice'
 
 export const store = configureStore({
@@ -14,9 +15,10 @@ export const store = configureStore({
         [productApi.reducerPath]: productApi.reducer,
         [categoryApi.reducerPath]: categoryApi.reducer,
         [orderApi.reducerPath]: orderApi.reducer,
+        [dashboardApi.reducerPath]: dashboardApi.reducer,
     },
     devTools: false,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware, productApi.middleware, categoryApi.middleware, orderApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware, productApi.middleware, categoryApi.middleware, orderApi.middleware, dashboardApi.middleware),
 })
 
 export type IRootState = ReturnType<typeof store.getState>

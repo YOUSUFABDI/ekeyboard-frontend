@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ApiSuccessResponseDT, AuthResponse, GetAuthenticatedUserResponseDT, UserDT } from '../../lib/types'
 import { API } from '../api'
-import { url } from 'inspector'
 
 const token = localStorage.getItem('token')
 

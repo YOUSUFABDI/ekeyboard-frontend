@@ -68,7 +68,16 @@ export const dashboardApi = createApi({
             }),
             providesTags: ['dashboardApi'],
         }),
+        getSummary: builder.query({
+            query: () => ({
+                url: '/dashboard/summary',
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+        }),
     }),
 })
 
-export const { useGetTopSellingProductsQuery, useGetRecentOrdersQuery } = dashboardApi
+export const { useGetTopSellingProductsQuery, useGetRecentOrdersQuery, useGetSummaryQuery } = dashboardApi

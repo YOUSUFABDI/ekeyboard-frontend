@@ -198,6 +198,11 @@ const Login = () => {
                                         </span>
                                     </div>
                                 </div>
+                                <div className="flex items-center justify-end">
+                                    <Link to="/forgot-password" className="hover:text-danger">
+                                        <span>Forgot password?</span>
+                                    </Link>
+                                </div>
                                 <button type="submit" disabled={isLoading} className="btn bg-primary text-white !mt-6 w-full border-0 uppercase shadow-[0_10px_20px_-10px_rgba(67,97,238,0.44)]">
                                     {isLoading ? 'Proceeding...' : 'Sign in'}
                                 </button>

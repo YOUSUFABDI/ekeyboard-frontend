@@ -74,7 +74,9 @@ const PublicHeader = () => {
         <header className="relative bg-white w-full px-5 py-2.5 dark:bg-black">
             <div className="w-full max-w-[1440px] mx-auto flex items-center justify-between">
                 <div className="flex-shrink-0">
-                    <span className="text-lg md:text-xl">Ekeyboard</span>
+                    <Link to={'/'}>
+                        <span className="text-lg md:text-xl">Ekeyboard</span>
+                    </Link>
                 </div>
 
                 {/* Desktop and Tablet navigation */}

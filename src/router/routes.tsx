@@ -3,6 +3,10 @@ const AccountSetting = lazy(() => import('../components/Admin/Profile/AccountSet
 const NotAllowed = lazy(() => import('../pages/NotAllowed'))
 const PublicLayout = lazy(() => import('../components/Layouts/PublicLayout'))
 const Login = lazy(() => import('../components/Auth/Login'))
+const Signup = lazy(() => import('../components/Auth/Signup'))
+const VerifyEmail = lazy(() => import('../components/Auth/VerifyEmail'))
+const ForgotPassword = lazy(() => import('../components/Auth/ForgotPassword'))
+const ResetPassword = lazy(() => import('../components/Auth/ResetPassword'))
 const Products = lazy(() => import('../components/Admin/Products/Products'))
 const OrdersPage = lazy(() => import('../pages/AdminPages/OrdersPage/OrdersPage'))
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
@@ -78,6 +82,26 @@ const routes = [
     {
         path: '/login',
         element: <Login />,
+        layout: 'blank',
+    },
+    {
+        path: '/sign-up',
+        element: <Signup />,
+        layout: 'blank',
+    },
+    {
+        path: '/verify-email',
+        element: <VerifyEmail />,
+        layout: 'blank',
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPassword />,
+        layout: 'blank',
+    },
+    {
+        path: '/reset-password',
+        element: <ResetPassword />,
         layout: 'blank',
     },
     {

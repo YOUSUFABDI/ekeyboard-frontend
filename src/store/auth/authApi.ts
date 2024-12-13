@@ -21,15 +21,45 @@ export const authApi = createApi({
             invalidatesTags: ['auth'],
         }),
 
-        signup: builder.mutation<AuthResponse, { formData: any }>({
-            query: ({ formData }) => {
+        signup: builder.mutation<AuthResponse, {}>({
+            query: (body) => {
                 return {
                     url: '/auth/signup',
                     method: 'POST',
-                    body: formData,
+                    body: body,
                     contentType: 'application/json',
                 }
             },
+            invalidatesTags: ['auth'],
+        }),
+
+        verifyOtp: builder.mutation<AuthResponse, { email: string; otp: number }>({
+            query: (body) => ({
+                url: '/auth/verfiy-otp',
+                method: 'POST',
+                body,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }),
+            invalidatesTags: ['auth'],
+        }),
+
+        forgotPassword: builder.mutation<void, { email: string }>({
+            query: (body) => ({
+                url: '/auth/forgot-password',
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: ['auth'],
+        }),
+
+        resetPassword: builder.mutation<void, { otp: number; newPassword: string }>({
+            query: (body) => ({
+                url: '/auth/reset-password',
+                method: 'POST',
+                body,
+            }),
             invalidatesTags: ['auth'],
         }),
 
@@ -88,4 +118,14 @@ export const authApi = createApi({
     }),
 })
 
-export const { useLoginMutation, useSignupMutation, useGetAuthenticatedUserQuery, useUpdatePasswordMutation, useUpdateAdminInfoMutation, useChangeProfileImgMutation } = authApi
+export const {
+    useLoginMutation,
+    useSignupMutation,
+    useVerifyOtpMutation,
+    useForgotPasswordMutation,
+    useResetPasswordMutation,
+    useGetAuthenticatedUserQuery,
+    useUpdatePasswordMutation,
+    useUpdateAdminInfoMutation,
+    useChangeProfileImgMutation,
+} = authApi

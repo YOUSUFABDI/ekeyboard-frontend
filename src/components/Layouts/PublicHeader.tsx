@@ -57,7 +57,7 @@ const PublicHeader = () => {
     }, [data, isError, error])
 
     const logout = () => {
-        window.localStorage.removeItem('token')
+        window.localStorage.clear()
         setUser(null)
 
         toast.fire({
@@ -165,7 +165,7 @@ const PublicHeader = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/login" className="text-primary !py-3">
+                                        <Link to="/sign-up" className="text-primary !py-3">
                                             Sign Up
                                         </Link>
                                     </li>
@@ -251,7 +251,7 @@ const PublicHeader = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/login" className="text-primary !py-3">
+                                        <Link to="/sign-up" className="text-primary !py-3">
                                             Sign Up
                                         </Link>
                                     </li>

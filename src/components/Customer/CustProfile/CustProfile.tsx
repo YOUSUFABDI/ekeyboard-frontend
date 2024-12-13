@@ -255,7 +255,7 @@ const CustProfile = () => {
                                 <ImageUploading value={image} onChange={handleImageChange} acceptType={['jpg', 'jpeg', 'png']} maxNumber={1}>
                                     {({ onImageUpload }) => (
                                         <button type="button" onClick={onImageUpload} className="ml-4 btn btn-primary">
-                                            {Ischanging ? 'Changing' : 'Change Profile Picture'}
+                                            {Ischanging ? 'Changing...' : 'Change Profile Picture'}
                                         </button>
                                     )}
                                 </ImageUploading>

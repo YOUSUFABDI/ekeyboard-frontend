@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { ApiErrorResponseDT } from '../../lib/types'
 import { useVerifyOtpMutation } from '../../store/auth/authApi' // Adjust path to your authApi
 import { setPageTitle } from '../../store/themeConfigSlice'
-import { AuthResponse, ApiErrorResponseDT } from '../../lib/types'
 
 const toast = Swal.mixin({
     toast: true,

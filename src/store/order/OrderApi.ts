@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API } from '../api'
-import { ApiSuccessResponseDT, MakeOrderRequestDT, OrderDT } from '../../lib/types'
+import { ApiSuccessResponseDT, MakeOrderRequestDT, OrderDT, OrderHistoryDT } from '../../lib/types'
 
 const token = localStorage.getItem('token')
 
@@ -44,7 +44,18 @@ export const orderApi = createApi({
             }),
             invalidatesTags: ['orders'],
         }),
+        getOrderHistory: builder.query<ApiSuccessResponseDT<OrderHistoryDT[]>, void>({
+            query: () => ({
+                url: '/orders/order-history',
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+            providesTags: ['orders'],
+        }),
     }),
 })
 
-export const { useMakeOrderMutation, useGetOrdersQuery, useChangeOrderStatusMutation } = orderApi
+export const { useMakeOrderMutation, useGetOrdersQuery, useChangeOrderStatusMutation, useGetOrderHistoryQuery } = orderApi

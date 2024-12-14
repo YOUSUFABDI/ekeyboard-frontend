@@ -142,3 +142,12 @@ export interface RecentOrdersResponse {
     }
     error: null | string // If there are errors
 }
+
+export type OrderHistoryDT = {
+    orderId: number
+    productName: string
+    quantity: number
+    price: number
+    status: string
+    createdDate: string
+}

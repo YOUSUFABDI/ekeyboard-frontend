@@ -181,7 +181,7 @@ const Orders = () => {
                                             ) : (
                                                 <select className="form-select" value={record.status} onChange={(e) => handleChangeStatus(record.id, e.target.value)}>
                                                     <option value="pending">Pending</option>
-                                                    <option value="delivered">Delivered</option>
+                                                    <option value="delivering">Delivering</option>
                                                     <option value="completed">Completed</option>
                                                 </select>
                                             ),

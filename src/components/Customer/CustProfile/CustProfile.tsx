@@ -450,7 +450,11 @@ const OrderHistory = () => {
                                     <td className="p-4 border-b">
                                         <span
                                             className={`inline-block px-3 py-1 text-sm font-medium rounded-md ${
-                                                order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'
+                                                order.status === 'pending'
+                                                    ? 'bg-yellow-100 text-yellow-700'
+                                                    : order.status === 'delivering'
+                                                    ? 'bg-blue-100 text-blue-700'
+                                                    : 'bg-green-100 text-green-700'
                                             }`}
                                         >
                                             {order.status}

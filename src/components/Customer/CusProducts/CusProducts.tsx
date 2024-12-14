@@ -18,6 +18,8 @@ const toast = Swal.mixin({
 
 const CusProducts = () => {
     const [products, setProducts] = useState<ProductDT[]>([])
+    const [searchQuery, setSearchQuery] = useState<string>('') // State to hold the search query
+    const [filteredProducts, setFilteredProducts] = useState<ProductDT[]>([]) // State for filtered products
 
     const dispatch = useDispatch()
     const { data, error, isLoading, isError } = useGetAllProductsQuery()
@@ -41,8 +43,23 @@ const CusProducts = () => {
         if (data && data.payload && !data.error) {
             const response = data as ApiSuccessResponseDT<ProductDT[]>
             setProducts(response.payload.data) // Set products state with API data
+            setFilteredProducts(response.payload.data) // Set filtered products initially to all products
         }
     }, [data, isError, error, dispatch])
+
+    useEffect(() => {
+        // Filter products based on the search query
+        if (searchQuery) {
+            const filtered = products.filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase()))
+            setFilteredProducts(filtered)
+        } else {
+            setFilteredProducts(products) // If no search query, show all products
+        }
+    }, [searchQuery, products])
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(event.target.value) // Update search query state
+    }
 
     return (
         <main>
@@ -51,21 +68,33 @@ const CusProducts = () => {
                     <span>All Product Categories</span>
 
                     <form>
-                        <div className="relative border border-white-dark/20  w-full flex">
-                            <button type="submit" className="text-primary m-auto p-3 flex items-center justify-center">
+                        <div className="relative border border-white-dark/20 w-full flex">
+                            <button
+                                type="submit"
+                                className="text-primary m-auto p-3 flex items-center justify-center"
+                                onClick={(e) => e.preventDefault()} // Prevent form submission on search button click
+                            >
                                 <IconSearch />
                             </button>
                             <input
                                 type="text"
                                 placeholder="Let's find any keyboard in fast way"
-                                className="form-input border-0 border-l rounded-none bg-white  focus:shadow-[0_0_5px_2px_rgb(194_213_255_/_62%)] dark:shadow-[#1b2e4b] placeholder:tracking-wider focus:outline-none py-3"
+                                value={searchQuery} // Bind search query state
+                                onChange={handleSearchChange} // Handle input change
+                                className="form-input border-0 border-l rounded-none bg-white focus:shadow-[0_0_5px_2px_rgb(194_213_255_/_62%)] dark:shadow-[#1b2e4b] placeholder:tracking-wider focus:outline-none py-3"
                             />
                         </div>
                     </form>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {isLoading ? Array.from({ length: 3 }).map((_, index) => <SkeletonCard key={index} />) : products.map((product) => <CusProduct key={product.id} product={product} />)}
+                    {isLoading ? (
+                        Array.from({ length: 3 }).map((_, index) => <SkeletonCard key={index} />)
+                    ) : filteredProducts.length === 0 ? (
+                        <div className="col-span-3 text-center text-gray-500 dark:text-gray-400">No products found.</div>
+                    ) : (
+                        filteredProducts.map((product) => <CusProduct key={product.id} product={product} />)
+                    )}
                 </div>
             </section>
         </main>

@@ -1,6 +1,8 @@
 import { lazy } from 'react'
 const AccountSetting = lazy(() => import('../components/Admin/Profile/AccountSetting'))
 const NotAllowed = lazy(() => import('../pages/NotAllowed'))
+const AboutUs = lazy(() => import('../pages/AboutUs'))
+const ContactUs = lazy(() => import('../pages/ContactUs'))
 const PublicLayout = lazy(() => import('../components/Layouts/PublicLayout'))
 const Login = lazy(() => import('../components/Auth/Login'))
 const Signup = lazy(() => import('../components/Auth/Signup'))
@@ -65,7 +67,7 @@ const routes = [
         path: '/about-us',
         element: (
             <PublicLayout>
-                <h1>about us</h1>
+                <AboutUs />
             </PublicLayout>
         ),
         layout: 'public',
@@ -74,7 +76,7 @@ const routes = [
         path: '/contact-us',
         element: (
             <PublicLayout>
-                <h1>contact us</h1>
+                <ContactUs />
             </PublicLayout>
         ),
         layout: 'public',

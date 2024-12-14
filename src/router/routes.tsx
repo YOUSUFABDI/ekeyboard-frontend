@@ -14,7 +14,7 @@ const OrdersPage = lazy(() => import('../pages/AdminPages/OrdersPage/OrdersPage'
 const ProtectedRoute = lazy(() => import('../components/ProtectedRoute'))
 const LandingPage = lazy(() => import('../components/Customer/LandingPg/LandingPg'))
 const Index = lazy(() => import('../pages/Index'))
-const Profile = lazy(() => import('../pages/ProfilePage/Profile'))
+const Profile = lazy(() => import('../pages/AdminPages/ProfilePage/Profile'))
 const Error = lazy(() => import('../components/Error'))
 const ProductPage = lazy(() => import('../pages/AdminPages/ProductsPage/ProductPage'))
 const ProtectAdmin = lazy(() => import('../components/ProtectAdmin'))
